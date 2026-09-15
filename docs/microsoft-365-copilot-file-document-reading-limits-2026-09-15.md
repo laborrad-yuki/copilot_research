@@ -12,7 +12,7 @@
 | 参照/要約の推奨上限 | 約80,000語 | Word/PowerPoint、要約・参照作成 | 公式ドキュメントに明記 | support.microsoft.com/en-us/topic/keep-it-short-and-sweet-...66de2ffd |
 | Q&Aの推奨上限 | 約7,500語 | ドキュメントへの質問応答 | 公式ドキュメントに明記 | 同上 |
 | Rewriteの推奨上限 | 約3,000語 | 書き換え | 公式ドキュメントに明記 | 同上 |
-| Word 要約の最大サイズ（Detailed） | 約1,500,000語／約300ページ（Microsoft広報は「3,000ページ＝従来の10倍」と表現） | Word、Detailed要約、M365 Copilotライセンス必須 | 公式ブログに明記 | techcommunity「More ways to summarize long Word documents」/4398979 |
+| Word 要約の最大サイズ（Detailed） | 約1,500,000語／最大3,000ページ（旧上限は約300ページ） | Word、Detailed要約、M365 Copilotライセンス必須 | 公式ブログに明記 | techcommunity「More ways to summarize long Word documents」/4398979 |
 | Word 要約（2024年の拡張値） | 約80,000語 | 2024年時点の「Summarize this doc」拡張値（従来比4倍） | 公式ブログに明記 | techcommunity「Summarize longer Word documents」/4227451 |
 | PowerPoint 要約上限 | 約40,000語 | PowerPoint「Summarize this presentation」 | 公式ドキュメントに明記 | support.microsoft.com/powerpoint/copilot/summarize-your-presentation |
 | Excel 分析対象 | 最大約200万セル | Copilot in Excel分析（テーブル） | 公式（Copilot FAQ応答） | Copilot公式FAQ「works best with Excel tables up to two million cells」 |
@@ -91,7 +91,7 @@ Copilot Studio公式「Quotas and limits」およびナレッジソース関連�
 ### 5. アプリ別の制約
 
 **Word**：
-- 要約（Detailed）は**約1,500,000語／約300ページ**まで。公式ブログ原文：*"Our new Detailed summary also supports summarization of up to 3,000 pages in a document, an upgrade from the previous cap of around 300 pages (a 10X increase!)."*（Microsoft広報は「3,000ページ」と表現するが、厳密には150万語）。**M365 Copilotエンタープライズライセンスが必要**で、Businessライセンスやコンシューマー版は対象外（公式ブログ／第三者）。Windows版はVersion 2503（Build 18623.20042）以降で展開。
+- 要約（Detailed）は**約1,500,000語／最大3,000ページ**まで。公式ブログ原文：*"Our new Detailed summary also supports summarization of up to 3,000 pages in a document, an upgrade from the previous cap of around 300 pages (a 10X increase!)."*（約300ページは旧上限）。**M365 Copilotエンタープライズライセンスが必要**で、Businessライセンスやコンシューマー版は対象外（公式ブログ／第三者）。Windows版はVersion 2503（Build 18623.20042）以降で展開。
 - 要約可能な最小は20語以上。自動要約はOneDrive/SharePoint保存が前提。
 - 「アクティブなドキュメントを1回で送る」際の別のペイロード上限があり、超過時に「The document content has been truncated to meet size constraints（サイズ制約のため内容が切り詰められた）」と表示される（Microsoft Q&A、ユーザー報告）。TOC・画像・埋め込みメタデータを除去（txt経由で再保存）すると回避しやすい、との実績報告。
 
@@ -166,10 +166,10 @@ Copilot Studio公式「Quotas and limits」およびナレッジソース関連�
 - Wordで「The document content has been truncated to meet size constraints」表示 → 分割かtxt再保存へ。
 - Copilot Chatで「daily upload limit reached」 → 未ライセンス枠の1日制限（推定3ファイル）。ライセンス取得かOneDrive参照へ。
 - SharePointファイルで「beyond my response limit / select a file smaller than 150 MB」 → サイズ超過。分割へ。
-- エージェントで「prompt instructions exceeds the threshold」 → 指示文を約5,000文字以下に圧縮。
+- エージェントで「prompt instructions exceeds the threshold」 → 8,000文字の公式上限よりかなり手前で失敗しうるため、実務上は5,300文字未満、できれば5,000文字前後まで圧縮。
 
 ## 注意事項（Caveats）
 - **公式が数値を出していない項目が多い**：業務用Copilot Chatのファイルサイズ・ファイル数・日次上限、コンテキストウィンドウのトークン数は、いずれも**Microsoft公式ドキュメントに数値記載がない**。本レポートの512MB・3ファイル/日・128kトークンは非公式（社員発言/ユーザー報告/報道）である。Microsoftは業務用を固定数値ではなく容量ベースの「Standard/Priority」モデルへ移行させており、今後も数値は変動する。
 - **同一URLでも数値が揺れる**：語数ガイダンス記事は言語版・更新時期で「80,000/7,500/3,000語」と「20ページ/15,000語」が混在。Notebookの参照上限も50/100/300と情報が割れる。ライセンス種別・時期差の可能性が高い。
-- **語数/ページ換算は目安**：Microsoftの「300ページ=150万語」「80,000語≒123ページ（1ページ650語換算）」等の換算は1ページあたり語数の前提で変動する。
+- **語数/ページ換算は目安**：Microsoftの「3,000ページ=150万語」「80,000語≒123ページ（1ページ650語換算）」等の換算は1ページあたり語数の前提で変動する。
 - **仕様は頻繁に変わる**：本レポートは2026年9月15日時点。特にExcel App Skills廃止（2026年2月）、Copilot Credits移行（2025年9月）、コンシューマー版のMicrosoft 365 Premiumへの再編（2025年10月）など、直近1年で大きな変更が続いている。導入前に必ず最新の公式ドキュメントで再確認すること。
